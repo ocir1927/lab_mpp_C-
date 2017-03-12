@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="firmatransportDataSet" targetNamespace="http://tempuri.org/firmatransportDataSet.xsd" xmlns:mstns="http://tempuri.org/firmatransportDataSet.xsd" xmlns="http://tempuri.org/firmatransportDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="firmatransportConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="firmatransportConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.lab_mpp.Properties.Settings.GlobalReference.Default.firmatransportConnectionString" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="clienti_curseTableAdapter" GeneratorDataComponentClassName="clienti_curseTableAdapter" Name="clienti_curse" UserDataComponentName="clienti_curseTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="firmatransportConnectionString (Settings)" DbObjectName="firmatransport.clienti_curse" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `id`, `nume_client`, `id_cursa` FROM `clienti_curse`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="curseTableAdapter" GeneratorDataComponentClassName="curseTableAdapter" Name="curse" UserDataComponentName="curseTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="firmatransportConnectionString (Settings)" DbObjectName="firmatransport.curse" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `idcursa`, `destinatie`, `data_ora`, `locuri_disponibile`, `oficiu` FROM `curse`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="oficiuTableAdapter" GeneratorDataComponentClassName="oficiuTableAdapter" Name="oficiu" UserDataComponentName="oficiuTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="firmatransportConnectionString (Settings)" DbObjectName="firmatransport.oficiu" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `idOficiu`, `nume` FROM `oficiu`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="operatoriTableAdapter" GeneratorDataComponentClassName="operatoriTableAdapter" Name="operatori" UserDataComponentName="operatoriTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="firmatransportConnectionString (Settings)" DbObjectName="firmatransport.operatori" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `username`, `password`, `email`, `oficiu` FROM `operatori`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="firmatransportDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="firmatransportDataSet" msprop:Generator_UserDSName="firmatransportDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="clienti_curse" msprop:Generator_TableClassName="clienti_curseDataTable" msprop:Generator_TableVarName="tableclienti_curse" msprop:Generator_TablePropName="clienti_curse" msprop:Generator_RowDeletingName="clienti_curseRowDeleting" msprop:Generator_RowChangingName="clienti_curseRowChanging" msprop:Generator_RowEvHandlerName="clienti_curseRowChangeEventHandler" msprop:Generator_RowDeletedName="clienti_curseRowDeleted" msprop:Generator_UserTableName="clienti_curse" msprop:Generator_RowChangedName="clienti_curseRowChanged" msprop:Generator_RowEvArgName="clienti_curseRowChangeEvent" msprop:Generator_RowClassName="clienti_curseRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="curse" msprop:Generator_TableClassName="curseDataTable" msprop:Generator_TableVarName="tablecurse" msprop:Generator_TablePropName="curse" msprop:Generator_RowDeletingName="curseRowDeleting" msprop:Generator_RowChangingName="curseRowChanging" msprop:Generator_RowEvHandlerName="curseRowChangeEventHandler" msprop:Generator_RowDeletedName="curseRowDeleted" msprop:Generator_UserTableName="curse" msprop:Generator_RowChangedName="curseRowChanged" msprop:Generator_RowEvArgName="curseRowChangeEvent" msprop:Generator_RowClassName="curseRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="oficiu" msprop:Generator_TableClassName="oficiuDataTable" msprop:Generator_TableVarName="tableoficiu" msprop:Generator_TablePropName="oficiu" msprop:Generator_RowDeletingName="oficiuRowDeleting" msprop:Generator_RowChangingName="oficiuRowChanging" msprop:Generator_RowEvHandlerName="oficiuRowChangeEventHandler" msprop:Generator_RowDeletedName="oficiuRowDeleted" msprop:Generator_UserTableName="oficiu" msprop:Generator_RowChangedName="oficiuRowChanged" msprop:Generator_RowEvArgName="oficiuRowChangeEvent" msprop:Generator_RowClassName="oficiuRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="operatori" msprop:Generator_TableClassName="operatoriDataTable" msprop:Generator_TableVarName="tableoperatori" msprop:Generator_TablePropName="operatori" msprop:Generator_RowDeletingName="operatoriRowDeleting" msprop:Generator_RowChangingName="operatoriRowChanging" msprop:Generator_RowEvHandlerName="operatoriRowChangeEventHandler" msprop:Generator_RowDeletedName="operatoriRowDeleted" msprop:Generator_UserTableName="operatori" msprop:Generator_RowChangedName="operatoriRowChanged" msprop:Generator_RowEvArgName="operatoriRowChangeEvent" msprop:Generator_RowClassName="operatoriRow">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
