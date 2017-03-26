@@ -5,22 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
-namespace lab_mpp
+namespace lab_mpp.repository
 {
-    class CurseRepository
+    class CurseRepository:IRepository<int,Cursa>
     {
-        readonly String ConnectionString;
+        readonly String _connectionString;
 
         public CurseRepository()
         {
-            ConnectionString =
+            _connectionString =
                 "server=localhost;user id=user_oficii;persistsecurityinfo=True;database=firmatransport;password=parola";
         }
 
-        public void Add(Cursa c)
+        public void Save(Cursa c)
         {
 
-            using (var conn = new MySqlConnection(ConnectionString))
+            using (var conn = new MySqlConnection(_connectionString))
             {
                 conn.Open();
                 MySqlCommand comm = conn.CreateCommand();
@@ -37,7 +37,7 @@ namespace lab_mpp
 
         public void Update(int id, Cursa cursa)
         {
-            using (var conn = new MySqlConnection(ConnectionString))
+            using (var conn = new MySqlConnection(_connectionString))
             {
                 conn.Open();
                 MySqlCommand command = conn.CreateCommand();
@@ -53,9 +53,10 @@ namespace lab_mpp
             }
         }
 
+
         public void Delete(int id)
         {
-            using (var connection = new MySqlConnection(ConnectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
                 MySqlCommand command = connection.CreateCommand();
@@ -68,7 +69,7 @@ namespace lab_mpp
         public List<Cursa> GetAll()
         {
             List<Cursa> curse = new List<Cursa>();
-            using (var connection = new MySqlConnection(ConnectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
                 MySqlCommand command = connection.CreateCommand();
@@ -93,7 +94,7 @@ namespace lab_mpp
 
         public Cursa FindOne(int id)
         {
-            using (var connection = new MySqlConnection(ConnectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
                 MySqlCommand command = connection.CreateCommand();
@@ -118,78 +119,5 @@ namespace lab_mpp
         }
     }
 
-    class ClientiRepository
-    {
-        readonly string ConnectionString;
-
-        public ClientiRepository()
-        {
-            ConnectionString =
-                "server=localhost;user id=user_oficii;persistsecurityinfo=True;database=firmatransport;password=parola";
-        }
-
-        public void Add(Client client)
-        {
-            using (var conn = new MySqlConnection(ConnectionString))
-            {
-                conn.Open();
-                MySqlCommand comm = conn.CreateCommand();
-                comm.CommandText = "INSERT INTO clienti_curse VALUES(@id,@nume, @id_cursa)";
-                comm.Parameters.AddWithValue("@id", client.Id);
-                comm.Parameters.AddWithValue("@nume", client.Nume);
-                comm.Parameters.AddWithValue("@id_cursa", client.IdCursa);
-                comm.ExecuteNonQuery();
-                conn.Close();
-            }
-        }
-
-        public List<Client> GetAll()
-        {
-            List<Client> clienti = new List<Client>();
-            using (var connection = new MySqlConnection(ConnectionString))
-            {
-                connection.Open();
-                MySqlCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM clienti_curse";
-                MySqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    Client cursa = new Client()
-                    {
-                        Id = reader.GetInt32(0),
-                        Nume = reader.GetString(1),
-                        IdCursa = reader.GetInt32(2)
-
-                    };
-                    clienti.Add(cursa);
-                }
-            }
-            return clienti;
-        }
-
-        public List<Client> GetAllByCursa(int idCursa)
-        {
-            List<Client> clienti = new List<Client>();
-            using (var connection = new MySqlConnection(ConnectionString))
-            {
-                connection.Open();
-                MySqlCommand command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM clienti_curse WHERE id_cursa=@idcursa";
-                command.Parameters.AddWithValue("@idcursa", idCursa);
-                MySqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    Client client = new Client()
-                    {
-                        Id = reader.GetInt32(0),
-                        Nume = reader.GetString(1),
-                        IdCursa = reader.GetInt32(2)
-
-                    };
-                    clienti.Add(client);
-                }
-            }
-            return clienti;
-        } 
-    }
+   
 }

@@ -30,13 +30,14 @@ namespace lab_mpp
                 Console.WriteLine(cursa);
             }*/
 //            Console.WriteLine(curseRepository.FindOne(1));
-            Client client=new Client("Pop Andrei",321);
-            ClientiRepository clientiRepository=new ClientiRepository();
+//            Client client=new Client("Pop Andrei",321);
+//            ClientiRepository clientiRepository=new ClientiRepository();
 //            clientiRepository.Add(client);  
-            foreach (var client1 in clientiRepository.GetAllByCursa(1))
+           /* foreach (var client1 in clientiRepository.GetAllByCursa(1))
             {
                 Console.WriteLine(client1);
-            }      
+            }*/
+                  
             Application.Run(new Form1());
         }
     }

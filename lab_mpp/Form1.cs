@@ -20,29 +20,10 @@ namespace lab_mpp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-/*
-            String connectionString =
-               "server=localhost;user id=user_oficii;persistsecurityinfo=True;database=firmatransport;password=parola";
-//            var connection = new MySqlConnection(connectionString);
+            // TODO: This line of code loads data into the 'firmatransportDataSet.clienti_curse' table. You can move, or remove it, as needed.
+            CurseRepository curseRepository=new CurseRepository();
+            dataGridView1.DataSource=curseRepository.GetAll();     
 
-            Console.WriteLine("s-a facut conexiunea cu serverul");
-
-            String select = "SELECT * FROM firmatransport.curse";
-           // MySqlCommand cmd = new MySqlCommand(select, connection);
-            using (var conn = new MySqlConnection(connectionString))
-            {
-                conn.Open();
-                var cmd = new MySqlCommand(select, conn);
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        Console.WriteLine("idcursa:{0} destinatie:{1}", reader[0] , reader[1]);
-                    }
-                }
-            }
-        }
-*/
         }
     }
 }
