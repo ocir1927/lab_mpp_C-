@@ -18,10 +18,10 @@ namespace lab_mpp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            DateTime dateTime=new DateTime(2017,3,20,10,30,0);
+//            DateTime dateTime=new DateTime(2017,3,20,10,30,0);
 
-            CurseRepository curseRepository=new CurseRepository();
-            Cursa c=new Cursa(10,"Tirgu Mures",dateTime,12,1);
+//            CurseRepository curseRepository=new CurseRepository();
+//            Cursa c=new Cursa(10,"Tirgu Mures",dateTime,12,1);
 //            curseRepository.Add(c);
 //            curseRepository.Update(10,c);
 //            curseRepository.Delete(10);
@@ -38,7 +38,7 @@ namespace lab_mpp
                 Console.WriteLine(client1);
             }*/
                   
-            Application.Run(new Form1());
+            Application.Run(new MainView());
         }
     }
 }
