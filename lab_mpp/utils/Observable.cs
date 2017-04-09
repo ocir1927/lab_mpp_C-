@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace lab_mpp.utils
 {
-    interface Observable<E>
+    public interface Observable<E>
     {
         void AddObserver(Observer<E> observer);
         void RemoveObserver(Observer<E> observer);

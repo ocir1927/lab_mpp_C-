@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace lab_mpp.utils
 {
-    interface Observer<E>
+    public interface Observer<E>
     {
         void Update(Observable<E> observable);
     }

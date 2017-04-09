@@ -38,7 +38,7 @@ namespace lab_mpp
                 Console.WriteLine(client1);
             }*/
                   
-            Application.Run(new MainView());
+            Application.Run(new Login());
         }
     }
 }

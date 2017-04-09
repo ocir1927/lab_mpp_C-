@@ -1,34 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using lab_mpp.domain;
-using lab_mpp.repository;
-using lab_mpp.services;
-using lab_mpp.utils;
-using MySql.Data.MySqlClient;
+using model;
+using persistence.services;
+using services;
 
-namespace lab_mpp
+namespace Firmatransport
 {
-    public partial class MainView : Form,Observer<Cursa>
+    public partial class MainView : Form, IObserver
     {
-        IClientiServices<Client> clientiServices;
-        CurseServices curseServices;
-        IOperatoriServices<Operator> operatoriServices;
-        IRezervariServices<Rezervare> rezervariServices;
-        public MainView()
+//        IClientiServices<Client> clientiServices;
+//        CurseServices curseServices;
+//        IOperatoriServices<Operator> operatoriServices;
+//        IRezervariServices<Rezervare> rezervariServices;
+        IServer Server;
+        List<Cursa> ModelCurse;
+
+
+        public MainView(IServer server)
         {
             InitializeComponent();
-            clientiServices=new ClientiServices();
-            curseServices=new CurseServices();
-            curseServices.AddObserver(this);
-            operatoriServices=new OperatoriServices();
-            rezervariServices=new RezervariServices();
+            Server = server;
+            ModelCurse = GetAllCurse();
+//            clientiServices=new ClientiServices();
+//            curseServices=new CurseServices();
+//            curseServices.AddObserver(this);
+//            operatoriServices=new OperatoriServices();
+//            rezervariServices=new RezervariServices();
         }
 
 
@@ -37,10 +36,14 @@ namespace lab_mpp
             BindData();
         }
 
+        private List<Cursa> GetAllCurse()
+        {
+            return Server.GetAllCurse();
+        }
+
         private void BindData()
         {
-            List<Cursa> curse = curseServices.GetAll();
-            SetItems(curse);
+            SetItems(ModelCurse);
         }
 
         protected override void OnClosed(EventArgs e)
@@ -66,19 +69,24 @@ namespace lab_mpp
                 item.SubItems.Add(cursa.DateTime.ToString());
                 item.SubItems.Add(cursa.LocuriDisponibile.ToString());
                 listViewCurse.Items.Add(item);
-
             }
         }
+
+        private List<Rezervare> GetAllByCursa(int idCursa)
+        {
+            return Server.GetAllByCursa(idCursa);
+        }
+
 
         private void ShowClienti(int idCursa)
         {
             listViewClienti.Items.Clear();
             List<Client> modelClienti = new List<Client>();
-            foreach (Rezervare rez in rezervariServices.GetAllByCursa(idCursa))
+            foreach (Rezervare rez in GetAllByCursa(idCursa))
             {
                 for (int i = 0; i < rez.NrLocuri; i++)
                 {
-                    modelClienti.Add(clientiServices.FindOne(rez.IdClient));
+                    modelClienti.Add(Server.FindClient(rez.IdClient));
                 }
             }
             for (int i = modelClienti.Count(); i < 18; i++)
@@ -90,12 +98,10 @@ namespace lab_mpp
             foreach (var client in modelClienti)
             {
                 j++;
-                ListViewItem item=new ListViewItem(j.ToString());
+                ListViewItem item = new ListViewItem(j.ToString());
                 item.SubItems.Add(client.Nume);
                 listViewClienti.Items.Add(item);
-
             }
-
         }
 
         private void listViewCurse_SelectedIndexChanged(object sender, EventArgs e)
@@ -110,13 +116,14 @@ namespace lab_mpp
             }
         }
 
+
         private void btnCauta_Click(object sender, EventArgs e)
         {
             string destinatie = txtDestinatie.Text.ToLower();
             string dateTime = txtData.Text;
             List<Cursa> curseFiltrare =
-                curseServices.GetAll().Where(cursa => cursa.Destinatie.ToLower().Contains(destinatie) 
-                && cursa.DateTime.ToString().ToLower().Contains(dateTime)).ToList();
+                ModelCurse.Where(cursa => cursa.Destinatie.ToLower().Contains(destinatie)
+                                          && cursa.DateTime.ToString().ToLower().Contains(dateTime)).ToList();
             SetItems(curseFiltrare);
         }
 
@@ -129,8 +136,8 @@ namespace lab_mpp
 
         private void btnRezervare_Click(object sender, EventArgs e)
         {
-            string numeClient=txtNumeClient.Text;
-            int nrLocuri= int.Parse(txtNrLocuri.Text);
+            string numeClient = txtNumeClient.Text;
+            int nrLocuri = int.Parse(txtNrLocuri.Text);
             int idCursa;
             int idClient;
             Cursa cursa;
@@ -145,24 +152,31 @@ namespace lab_mpp
                     Oficiu = 1
                 };
                 idCursa = Convert.ToInt32(listViewCurse.SelectedItems[0].SubItems[0].Text);
-                if (clientiServices.FindByName(numeClient) == null)
+                if (Server.FindClient(numeClient) == null)
                 {
-                    clientiServices.Add(new Client(numeClient));
+                    Server.AddClient(new Client(numeClient));
                 }
-                idClient = clientiServices.FindByName(numeClient).Id;
+                idClient = Server.FindClient(numeClient).Id;
                 Rezervare rezervare = new Rezervare(idCursa, idClient, nrLocuri);
-                rezervariServices.Add(rezervare);
+                Server.AddRezervare(rezervare);
                 cursa.LocuriDisponibile = cursa.LocuriDisponibile - nrLocuri;
-                curseServices.Update(idCursa,cursa);
+                Server.UpdateCursa(cursa);
                 ShowClienti(cursa.Id);
             }
         }
 
 
-        public void Update(Observable<Cursa> observable)
+        public void CursaUpdated(Cursa cursa)
         {
-
-            BindData();
+            foreach (Cursa c in ModelCurse)
+            {
+                if (c.Id == cursa.Id)
+                {
+                    int index = ModelCurse.IndexOf(cursa);
+                    ModelCurse[index] = c;
+                    break;
+                }
+            }
         }
     }
 }

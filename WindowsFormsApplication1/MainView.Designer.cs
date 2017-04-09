@@ -1,6 +1,4 @@
-﻿using lab_mpp.utils;
-
-namespace lab_mpp
+﻿namespace Firmatransport
 {
     partial class MainView
     {
@@ -32,8 +30,6 @@ namespace lab_mpp
         {
             this.components = new System.ComponentModel.Container();
             this.clienticurseBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.firmatransportDataSet = new lab_mpp.firmatransportDataSet();
-            this.clienti_curseTableAdapter = new clienti_curseTableAdapter();
             this.listViewCurse = new System.Windows.Forms.ListView();
             this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Destinatie = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -56,22 +52,17 @@ namespace lab_mpp
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.clienticurseBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.firmatransportDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // clienticurseBindingSource
             // 
             this.clienticurseBindingSource.DataMember = "clienti_curse";
-            this.clienticurseBindingSource.DataSource = this.firmatransportDataSet;
             // 
             // firmatransportDataSet
             // 
-            this.firmatransportDataSet.DataSetName = "firmatransportDataSet";
-            this.firmatransportDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // clienti_curseTableAdapter
             // 
-            this.clienti_curseTableAdapter.ClearBeforeFill = true;
             // 
             // listViewCurse
             // 
@@ -270,16 +261,13 @@ namespace lab_mpp
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.MainView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.clienticurseBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.firmatransportDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private firmatransportDataSet firmatransportDataSet;
         private System.Windows.Forms.BindingSource clienticurseBindingSource;
-        private clienti_curseTableAdapter clienti_curseTableAdapter;
         private System.Windows.Forms.ListView listViewCurse;
         private System.Windows.Forms.ColumnHeader Id;
         private System.Windows.Forms.ColumnHeader Destinatie;
